@@ -23,6 +23,7 @@ WHERE
         WHERE
             b.v_id = v.v_id
     );
+
 --3.Retrieve all available vehicles of a specific type (e.g. cars).
 SELECT
     v.v_id AS vehicle_id,
@@ -36,7 +37,8 @@ FROM vehicles v
 WHERE
     v.v_availability_status = 'available'
     AND v.v_type = 'car'
-    --4.Find the total number of bookings for each vehicle and display only those vehicles that have more than 2 bookings.
+
+--4.Find the total number of bookings for each vehicle and display only those vehicles that have more than 2 bookings.
 SELECT
     v.v_name AS vehicle_name,
     COUNT(b.b_id) AS total_bookings
