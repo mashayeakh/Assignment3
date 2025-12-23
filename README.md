@@ -3,7 +3,7 @@
 ## 📌 Overview & Objectives
 
 This project evaluates the understanding of **relational database design**, **Entity-Relationship Diagrams (ERDs)**, and **SQL querying techniques**.  
-The goal is to design and query a simplified **Vehicle Rental System** database that reflects real-world business logic and relationships.
+The objective is to design and query a simplified **Vehicle Rental System** database that accurately represents real-world business logic, data integrity, and entity relationships.
 
 ---
 
@@ -13,7 +13,7 @@ Upon successful completion of this project, you will be able to:
 
 - Design ERDs with **1:1, 1:N, and N:1** relationships
 - Understand and apply **primary key** and **foreign key** constraints
-- Write SQL queries using:
+- Write efficient and structured SQL queries using:
   - `JOIN`
   - `EXISTS / NOT EXISTS`
   - `WHERE`
@@ -23,7 +23,7 @@ Upon successful completion of this project, you will be able to:
 
 ## 🗂️ Database Schema
 
-The system consists of **three primary entities**:
+The system consists of **three primary entities**, each designed to ensure normalization and referential integrity.
 
 ---
 
@@ -37,9 +37,6 @@ The system consists of **three primary entities**:
 | password | VARCHAR | —                 |
 | phone    | VARCHAR | —                 |
 | role     | VARCHAR | Admin or Customer |
-
-📷 **Table Structure**  
-![Users table](image.png)
 
 ---
 
@@ -55,9 +52,6 @@ The system consists of **three primary entities**:
 | rental_price    | DECIMAL | —                                |
 | status          | VARCHAR | Available / Rented / Maintenance |
 
-📷 **Table Structure**  
-![Vehicles table](image-1.png)
-
 ---
 
 ### 📅 Bookings Table
@@ -71,9 +65,6 @@ The system consists of **three primary entities**:
 | end_date   | DATE    | —                                           |
 | status     | VARCHAR | Pending / Confirmed / Completed / Cancelled |
 | cost       | DECIMAL | —                                           |
-
-📷 **Table Structure**  
-![Bookings table](image-2.png)
 
 ---
 
@@ -92,16 +83,15 @@ The system consists of **three primary entities**:
 
 - **Database**: PostgreSQL
 - **Database Tool**: Beekeeper Studio
-- **ERD Tool**: DrawSQL
+- **ERD Design Tool**: DrawSQL
 
 ---
 
-## 🧩 Full ERD Diagram (With Proper Relationships)
+## 🧩 ERD Design Reference
 
-📷 **Complete ERD**  
-![full-diagram](image-7.png)
+The complete ERD diagram with proper relationships was designed using DrawSQL.
 
-🔗 **DrawSQL Link**  
+🔗 **DrawSQL Project Link**  
 👉 https://drawsql.app/teams/krypto-2/diagrams/vehicle-rental-system
 
 ---
@@ -117,16 +107,13 @@ Retrieve booking information along with customer and vehicle details.
 
 **Explanation:**  
 This query uses `INNER JOIN` to combine data from the **bookings**, **users**, and **vehicles** tables.  
-It retrieves meaningful booking information such as:
+It provides a consolidated view of booking records, including:
 
 - Booking ID
 - Customer name
 - Vehicle name
 - Booking start and end dates
 - Booking status
-
-📷 **Query Output**  
-![Output 1](image-3.png)
 
 ---
 
@@ -138,10 +125,7 @@ Find vehicles that have **never been booked**.
 **Explanation:**  
 This query identifies vehicles that do not appear in the **bookings** table.  
 The `NOT EXISTS` clause checks, for each vehicle, whether a related booking record exists.  
-If no booking is found, the vehicle is returned.
-
-📷 **Query Output**  
-![Output 2](image-4.png)
+If no matching booking is found, the vehicle is included in the result.
 
 ---
 
@@ -156,8 +140,7 @@ This query filters the **vehicles** table using the `WHERE` clause with multiple
 - Vehicle type must be `'car'`
 - Vehicle status must be `'available'`
 
-📷 **Query Output**  
-![Output 3](image-5.png)
+This ensures that only vehicles ready for booking are returned.
 
 ---
 
@@ -167,11 +150,8 @@ This query filters the **vehicles** table using the `WHERE` clause with multiple
 Find vehicles with **more than two bookings**.
 
 **Explanation:**  
-This query groups booking records by vehicle and counts how many times each vehicle has been booked.  
-The `HAVING` clause is used to filter aggregated results, returning only vehicles with more than **two bookings**.
-
-📷 **Query Output**  
-![Output 4](image-6.png)
+This query groups booking records by vehicle and counts the total number of bookings per vehicle.  
+The `HAVING` clause is used to filter aggregated results, returning only vehicles that have been booked **more than two times**.
 
 ---
 
