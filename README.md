@@ -29,42 +29,42 @@ The system consists of **three primary entities**, each designed to ensure norma
 
 ### 👤 Users Table
 
-| Column   | Type    | Constraints       |
-| -------- | ------- | ----------------- |
-| u_id     | INT     | Primary Key       |
-| name     | VARCHAR | —                 |
-| email    | VARCHAR | Unique            |
-| password | VARCHAR | —                 |
-| phone    | VARCHAR | —                 |
-| role     | VARCHAR | Admin or Customer |
+| Column     | Type    | Constraints       |
+| ---------- | ------- | ----------------- |
+| u_id       | INT     | Primary Key       |
+| u_name     | VARCHAR | —                 |
+| u_email    | VARCHAR | Unique            |
+| u_password | VARCHAR | —                 |
+| u_phone    | VARCHAR | —                 |
+| user_role  | VARCHAR | Admin or Customer |
 
 ---
 
 ### 🚘 Vehicles Table
 
-| Column          | Type    | Constraints                      |
-| --------------- | ------- | -------------------------------- |
-| v_id            | INT     | Primary Key                      |
-| name            | VARCHAR | —                                |
-| model           | VARCHAR | —                                |
-| type            | VARCHAR | —                                |
-| registration_no | VARCHAR | Unique                           |
-| rental_price    | DECIMAL | —                                |
-| status          | VARCHAR | Available / Rented / Maintenance |
+| Column                | Type    | Constraints                      |
+| --------------------- | ------- | -------------------------------- |
+| v_id                  | INT     | Primary Key                      |
+| v_name                | VARCHAR | —                                |
+| v_model               | VARCHAR | —                                |
+| v_type                | VARCHAR | —                                |
+| v_registration_no     | VARCHAR | Unique                           |
+| v_rental_price        | INT     | —                                |
+| v_availability_status | VARCHAR | Available / Rented / Maintenance |
 
 ---
 
 ### 📅 Bookings Table
 
-| Column     | Type    | Constraints                                 |
-| ---------- | ------- | ------------------------------------------- |
-| b_id       | INT     | Primary Key                                 |
-| u_id       | INT     | Foreign Key → Users(u_id)                   |
-| v_id       | INT     | Foreign Key → Vehicles(v_id)                |
-| start_date | DATE    | —                                           |
-| end_date   | DATE    | —                                           |
-| status     | VARCHAR | Pending / Confirmed / Completed / Cancelled |
-| cost       | DECIMAL | —                                           |
+| Column           | Type    | Constraints                                 |
+| ---------------- | ------- | ------------------------------------------- |
+| b_id             | INT     | Primary Key                                 |
+| u_id             | INT     | Foreign Key → Users(u_id)                   |
+| v_id             | INT     | Foreign Key → Vehicles(v_id)                |
+| b_start_date     | DATE    | —                                           |
+| b_end_date       | DATE    | —                                           |
+| b_booking_status | VARCHAR | Pending / Confirmed / Completed / Cancelled |
+| b_total_cost     | INT     | —                                           |
 
 ---
 
@@ -122,10 +122,11 @@ It provides a consolidated view of booking records, including:
 **Objective:**  
 Find vehicles that have **never been booked**.
 
-**Explanation:**  
-This query identifies vehicles that do not appear in the **bookings** table.  
-The `NOT EXISTS` clause checks, for each vehicle, whether a related booking record exists.  
-If no matching booking is found, the vehicle is included in the result.
+**Explanation:**
+
+- This query identifies vehicles that do not appear in the **bookings** table.
+- The `NOT EXISTS` clause checks, for each vehicle, whether a related booking record exists.
+- If no matching booking is found, the vehicle is included in the result.
 
 ---
 
@@ -149,16 +150,12 @@ This ensures that only vehicles ready for booking are returned.
 **Objective:**  
 Find vehicles with **more than two bookings**.
 
-**Explanation:**  
-This query groups booking records by vehicle and counts the total number of bookings per vehicle.  
-The `HAVING` clause is used to filter aggregated results, returning only vehicles that have been booked **more than two times**.
+**Explanation:**
+
+- This query groups booking records by vehicle and counts the total number of bookings per vehicle.
+- The `HAVING` clause is used to filter aggregated results, returning only vehicles that have been booked **more than two times**.
 
 ---
 
-## 👨‍💻 Author
-
 **Designed and implemented by**  
 **Md. Masayeakh Islam**
-
-🔗 **GitHub Profile**  
-👉 https://github.com/mashayeakh
